@@ -1,0 +1,16 @@
+#parameters
+#$1: b
+#$2: t
+#$3: extension to the output (for compute_mtp & run_script_glpsol)
+#$4: ctg_BAC_table
+#$5: DEBUG parameter
+#$6: base_dir
+#$7: B (cooperative bury threshold).
+#$8: size file..
+
+parameter="${3}"
+
+compute_mtp_small -c ${4} -f 2 -s ${8} -b $1 -t $2 -T 7 -G 3300 -o "${6}/output_ctg_mtp_${parameter}.txt" -v ${5} -B ${7} 
+
+more "${6}/output_ctg_mtp_${parameter}.txt" | awk -F "\t" '{print $3}' | awk '{for(i=1; i<=NF; i++) print $i}' > "${6}/output_mtp_clones_${parameter}.txt"
+

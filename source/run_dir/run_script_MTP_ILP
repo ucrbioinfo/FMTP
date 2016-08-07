@@ -1,0 +1,24 @@
+#$1 : t for MTP-LP (sulston score threshold)
+#$2 : B' for MTP-LP (cooperative bury threshold)
+
+#B: bury thresold
+B=90
+
+#t1: sulstons score threshold)
+t1=$1
+
+#b1: cooperative bury threshold
+b1=$2
+
+
+#parameters for MTP_LP command below
+#$1: b (bury threhsold)
+#$2: t (sulston score threshold)
+#$3: extension to the output (for compute_mtp & run_script_glpsol)
+#$4: ctg_BAC_table
+#$5: partial_output_ctg_MTP_filename
+#$6: DEBUG parameter
+#$7: BASE_DIR
+#$8 B' (cooperative bury threshold)
+
+MTP_LP ${B} ${t1} ILP_t_${t1}_B2_${b1} ../../dataset/maps/Real_Rice_Physical_Map/output_ctg_BAC_table.txt output_partial_mtp_${t1}_${b1}.txt 0 . ${b1}

@@ -1,0 +1,25 @@
+#parameters
+#$1: b (bury threhsold)
+#$2: t (sulston score threshold)
+#$3: extension to the output (for compute_mtp & run_script_glpsol)
+#$4: ctg_BAC_table
+#$5: partial_output_ctg_MTP_filename
+#$6: DEBUG parameter
+#$7: BASE_DIR
+#$8 B' (cooperative bury threshold)
+
+parameter="${3}"
+base_dir=$7
+
+#print parameter...
+echo ""
+echo ">>>>>>>>>>>>>>>>>>>>>>>>>>   $parameter   >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+echo ">>>>>>>>>>>>  ${5} >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+echo ">>>>>>>>>>>>>> ${3} >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>"
+echo ""
+echo ""
+
+compute_mtp -f 2 -c ${4} -s ../../dataset/size_file/rice_clones.sizes -b $1 -t $2 -T 7 -G 3300 -o ${base_dir}/output_${parameter} -O ${base_dir}/${5} -v ${6} -B ${8} 
+
+run_script_glpsol output_${parameter}- $parameter ${4} ${5} ${base_dir}
+

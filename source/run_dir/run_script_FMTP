@@ -1,0 +1,5 @@
+#run ILP_MODULE (first parameter: sulston score threshold, second parameter: cooperative bury threshold)
+./run_script_MTP_ILP 1e-10 85
+
+#run MST_MODULE
+./run_script_MTP_MST 1e-10 85 1e-4 80

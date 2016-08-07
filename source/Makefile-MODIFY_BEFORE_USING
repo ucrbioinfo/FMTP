@@ -1,0 +1,28 @@
+RM=rm -f
+TARGETS=compute_mtp compute_mtp_small
+CC = g++ -g -Wall -Werror  -m32
+OBJ = Contig.o Clone.o Utils.o Band.o
+LIB = -I/ABSOLUTE_PATH_TO_BOOST_LIBRARY/
+
+all: $(TARGETS)
+
+clean:
+	$(RM) $(TARGETS) *.o
+
+Band.o: Band.cpp Band.h
+	$(CC) $(LIB) -c Band.cpp
+
+Utils.o: Utils.cpp Utils.h
+	$(CC) $(LIB) -c Utils.cpp
+
+Clone.o: Clone.cpp Clone.h
+	$(CC) $(LIB) -c Clone.cpp
+
+Contig.o: Contig.cpp Contig.h
+	$(CC) $(LIB) -c Contig.cpp
+
+compute_mtp: Compute_MTP.cpp $(OBJ)
+	$(CC) $(LIB) $(OBJ) Compute_MTP.cpp -o run_dir/$@
+
+compute_mtp_small: Compute_MTP_Small.cpp $(OBJ)
+	$(CC) $(LIB) $(OBJ) Compute_MTP_Small.cpp -o run_dir/$@

@@ -1,0 +1,31 @@
+#$1 : t for MTP-LP (sulston score threshold)
+#$2 : B' for MTP-LP (cooperative bury threshold)
+#$3 : t for MTP-MST (sulston score threshold)
+#$4 : B' for MTP-MST (cooperative bury threshold)
+
+t1=$1
+b1=$2
+t2=$3
+b2=$4
+
+#B: bury threshold
+B=90
+
+#parameters for MTP_MST command below
+#$1: b
+#$2: t
+#$3: extension to the output (for compute_mtp & run_script_glpsol)
+#$4: ctg_BAC_table
+#$5: DEBUG parameter
+#$6: base_dir
+#$7: B (cooperative bury threshold).
+#$8: size file..
+
+MTP_MST ${B} ${t2} MTP_ILP_t_${t1}_B2_${b1}_MST_t_${t2}_B2_${b2} output_ctg_2_mtp_ILP_t_${t1}_B2_${b1}.txt  0 . ${b2} ../../dataset/size_file/rice_clones.sizes 
+
+
+#remove temporary files
+rm -f output_ctg_2_mtp_ILP_t_${t1}_B2_${b1}.txt
+rm -f output_partial_mtp_${t1}_${b1}.txt
+rm -f *.dot
+rm -f *.sol

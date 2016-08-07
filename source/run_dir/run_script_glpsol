@@ -1,0 +1,30 @@
+#!/bin/sh
+
+#$1: file_base_name (example.. output- )
+#$2: parameter_extension
+#$3: output_ctg_BAC_file_path (ex.. ../dataset/maps/based_on_fingerprint_data/output_ctg_BAC_table.txt)
+#$4: output_ctg_MTP_file produced by Compute_MTP...
+#$5: base_dir...
+#$6: type.. barley or rice..
+#cd ${5}
+
+
+
+rm -f ${5}/output_ctg_2_mtp_${2}.txt
+
+cat ${5}/${4} >> ${5}/output_ctg_2_mtp_${2}.txt
+
+if [ $# -eq 0 ]
+    then
+    echo "Please enter the parameters"
+    exit
+fi
+
+for name in `ls $5/$1*.txt`
+do
+  glpsol -m "${name}" -o "${name}.sol"
+  ./GLPKParser.pl "$3" "${name}.sol" "${5}/output_ctg_2_mtp_${2}.txt"
+   rm -f "${name}.sol"
+   rm -f "${name}"
+done
+
